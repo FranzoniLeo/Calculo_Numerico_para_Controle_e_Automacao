@@ -135,16 +135,18 @@ def secante(f, x0, x1, p = 1e-8, max_iters = 80):
     
     for k in range(max_iters):
         if abs(f1) < p:
-            return (x1, k)
+            break
+            #return (x1, k)
         
         s = f1/f0
-        p = (x0 - x1)*s
+        t = (x0 - x1)*s
         q = 1 - s
 
-        if p/q == 0:
+        if q == 0:
             return (None, k)
         
-        x2 = x1 - p/q
+        x2 = x1 - t/q
+        
         if abs(x1 - x0) < p*abs(x2):
             return x2, k
         f2 = f(x2)
@@ -152,11 +154,16 @@ def secante(f, x0, x1, p = 1e-8, max_iters = 80):
         if abs(f2)>abs(f1):
             x0 = x2
             f0 = f2
+        else:
+            x0 = x1
+            f0 = f1
+            x1 = x2
+            f1 = f2
 
         x0_vec.append(x0)
         x1_vec.append(x1)
         func_vec.append(f2)
-        digse_vec.append(digse(x0,x2))
+        digse_vec.append(digse(x0,x1))
     
     return x0_vec, x1_vec, func_vec, digse_vec
         
