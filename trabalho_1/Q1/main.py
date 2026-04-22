@@ -2,6 +2,9 @@ import numpy as np
 
 
 from utils.bisseccao import Bisseccao
+from utils.falsa_posicao import FalsaPosicao
+from utils.newton import Newton
+from utils.secante import Secante
 
 def funcao(f, eps = 0.0002, D = 0.05, Re = 100000):
     return ((1/(np.sqrt(f))) + (2*np.log10(((eps)/(3.7*D)) + ((2.51)/(Re*(np.sqrt(f)))))))
@@ -22,3 +25,7 @@ bisseccao = Bisseccao(funcao, 0.01, 0.10)
 bisseccao.calcular()
 bisseccao.imprimir()
 
+
+falsa_posicao = FalsaPosicao(funcao, 0.01, 0.10)
+falsa_posicao.calcular()
+falsa_posicao.imprimir()
