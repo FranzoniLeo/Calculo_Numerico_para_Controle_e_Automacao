@@ -1,9 +1,16 @@
 import pandas as pd
 import numpy as np
 
-from outros.Q1 import digse
 
 class Newton:
+    ''' Inicialização da classe Newton
+    Args:
+        f: Função a ser analisada
+        df: Derivada da função f
+        x0: Ponto inicial
+        p: Precisão (padrão: 1e-8)
+        max_iters: Número máximo de iterações (padrão: 80)
+    '''
     def __init__(self, f, df, x0, p = 1e-8, max_iters = 80):
         self.f = f
         self.df = df
@@ -54,7 +61,9 @@ class Newton:
             x0 = x1
             i = i + 1
 
-        return xk_vec, func_vec, dfunc_vec, digse_vec
+        self.resultado = (xk_vec, func_vec, dfunc_vec, digse_vec)
+        return self.resultado 
+        
     
 
     def imprimir(self):

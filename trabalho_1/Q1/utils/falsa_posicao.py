@@ -2,7 +2,14 @@ import numpy as np
 import pandas as pd
 
 class FalsaPosicao:
-    
+    ''' Inicialização da classe Falsa Posição
+    Args:
+        f: Função a ser analisada
+        a: Limite esquerdo do intervalo
+        b: Limite direito do intervalo
+        p: Precisão (padrão: 1e-8)
+        max_iters: Número máximo de iterações (padrão: 80)
+    '''
 
     def __init__(self, f, a, b, p = 1e-8, max_iters = 80):
         self.f = f
@@ -48,7 +55,8 @@ class FalsaPosicao:
             func_vec.append(self.f(xs))
             digse_vec.append(self._digse(xa,xs))
 
-        return xa_vec, xs_vec, func_vec, digse_vec
+        self.resultado = (xa_vec, xs_vec, func_vec, digse_vec)
+        return self.resultado 
 
     def imprimir(self):
         if self.resultado is None:

@@ -3,6 +3,14 @@ import numpy as np
 
 
 class Secante:
+    ''' Inicialização da classe Secante
+    Args:
+        f: Função a ser analisada
+        x0: Ponto inicial
+        x1: Ponto inicial
+        p: Precisão (padrão: 1e-8)
+        max_iters: Número máximo de iterações (padrão: 80)
+    '''
     def __init__(self, f, x0, x1, p = 1e-8, max_iters = 80):
         self.f = f
         self.x0 = x0
@@ -63,7 +71,9 @@ class Secante:
             digse_vec.append(self._digse(x0,x1))
         
 
-        return x0_vec, x1_vec, func_vec, digse_vec
+
+        self.resultado = (x0_vec, x1_vec, func_vec, digse_vec)
+        return self.resultado
         
     
     def imprimir(self):
