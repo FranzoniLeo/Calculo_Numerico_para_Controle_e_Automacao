@@ -17,6 +17,9 @@ class Secante:
         self.x1 = x1
         self.p = p
         self.max_iters = max_iters
+
+    def _digse(self, xa, xd):
+        return -(np.log10((abs(xd - xa)) / (abs(xd))))
     
     def calcular(self):
 
@@ -93,6 +96,3 @@ class Secante:
         print('\n')
         print('--------------------------------')
         print('\n')
-
-
-        print(tabela)

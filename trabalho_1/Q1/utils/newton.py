@@ -17,7 +17,6 @@ class Newton:
         self.x0 = x0
         self.p = p
         self.max_iters = max_iters
-    
     def _digse(self, xa, xd):
         return -(np.log10((abs(xd - xa)) / (abs(xd))))
 
@@ -38,6 +37,7 @@ class Newton:
         gf = f(x0)
         dgf = df(x0)
         if dgf == 0:
+            self.resultado = None
             return None, i
         x1 = x0 - (gf/dgf)
 
@@ -46,11 +46,13 @@ class Newton:
             dgf = df(x0)
 
             if dgf == 0:
+                self.resultado = None
                 return None, i
             
             x1 = x0 - (gf/dgf)
             if abs(f(x1)) < p:
-                return xk_vec, func_vec, dfunc_vec, digse_vec
+                self.resultado = (xk_vec, func_vec, dfunc_vec, digse_vec)
+                return self.resultado
 
 
             xk_vec.append(x1)
@@ -63,7 +65,6 @@ class Newton:
 
         self.resultado = (xk_vec, func_vec, dfunc_vec, digse_vec)
         return self.resultado 
-        
     
 
     def imprimir(self):
