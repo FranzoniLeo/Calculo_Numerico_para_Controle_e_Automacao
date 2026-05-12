@@ -1,5 +1,6 @@
 from utils.gauss import Gauss
 from utils.LUP import LUP
+from utils.Jacobi import Jacobi
 import numpy as np
 
 A = [[4, -1, 0, -1, 0, 0, 0, 0, 0],
@@ -23,3 +24,7 @@ lup = LUP(A, b)
 lup.fatoracaoLUP()
 lup.resolver()
 lup.imprimir()
+
+jacobi = Jacobi(A, b)
+jacobi.resolver(x_0 = [0, 0, 0, 0, 0, 0, 0, 0, 0])
+jacobi.imprimir()
