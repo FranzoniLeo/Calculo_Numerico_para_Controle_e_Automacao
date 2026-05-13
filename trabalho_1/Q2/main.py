@@ -15,6 +15,7 @@ A = [[4, -1, 0, -1, 0, 0, 0, 0, 0],
 
 b = [175, 100, 150, 75, 0, 50, 75, 0, 50]
 
+
 gauss = Gauss(A, b)
 gauss.triangularizacao()
 gauss.retrosubstituicao()
@@ -24,6 +25,7 @@ lup = LUP(A, b)
 lup.fatoracaoLUP()
 lup.resolver()
 lup.imprimir()
+
 
 jacobi = Jacobi(A, b)
 jacobi.resolver(x_0 = [0, 0, 0, 0, 0, 0, 0, 0, 0])
