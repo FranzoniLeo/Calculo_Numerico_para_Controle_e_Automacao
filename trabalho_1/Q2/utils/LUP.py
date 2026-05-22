@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 
 class LUP:
@@ -77,9 +78,26 @@ class LUP:
 
         #print(x)
 
-        self.x = x
-        return self.x
+    
+        self.resultado = x
+        return self.resultado
 
     def imprimir(self):
         print(" ")
-        print(self.x)
+        print(self.resultado)
+
+
+    def exportar(self):
+        if self.resultado is None:
+            self.resolver()
+
+        tabela = pd.DataFrame(
+            {
+                'x': self.resultado
+            }
+        )
+
+        
+        tabela.to_latex('trabalho_1/Q2/resultados_Q2/fatoracaoLUP_Q2.tex', index=True)
+
+        pass

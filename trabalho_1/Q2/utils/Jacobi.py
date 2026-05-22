@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 class Jacobi:
     def __init__(self, A, b):
@@ -19,11 +20,15 @@ class Jacobi:
         k = 1
 
         x_k = x_0
+        
         x_k1 = np.zeros(n)
+
         for j in range(n):
             x_k[j] = (1/A[j][j]) * (b[j] - np.sum(A[j][:j] * x_0[:j]) - np.sum(A[j][j+1:] * x_0[j+1:]))
 
         while (k < max_iters):
+            
+            
             for j in range(n):
 
                 fator = 1/A[j, j]
@@ -37,12 +42,36 @@ class Jacobi:
             x_k = x_k1.copy()
             k = k + 1
 
+            
 
-        #print(k)
+
+
+        
 
         self.x_k = x_k
+        self.resultado = x_k
+
+
         return self.x_k
 
     def imprimir(self):
         print(" ")
         print(self.x_k)
+        
+
+
+    def exportar(self):
+        if self.resultado is None:
+            self.resolver()
+        tabela = pd.DataFrame(
+            {
+                'x': self.x_k
+            }
+        )
+        tabela.index.name = 'iteração'
+
+        
+        tabela.to_latex('trabalho_1/Q2/resultados_Q2/jacobi_Q2.tex', index=True)
+
+        pass
+    

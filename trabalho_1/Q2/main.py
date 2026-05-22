@@ -20,13 +20,16 @@ gauss = Gauss(A, b)
 gauss.triangularizacao()
 gauss.retrosubstituicao()
 gauss.imprimir()
+gauss.exportar()
 
 lup = LUP(A, b)
 lup.fatoracaoLUP()
 lup.resolver()
 lup.imprimir()
+lup.exportar()
 
 
 jacobi = Jacobi(A, b)
 jacobi.resolver(x_0 = [0, 0, 0, 0, 0, 0, 0, 0, 0])
 jacobi.imprimir()
+jacobi.exportar()

@@ -119,7 +119,6 @@ class Jacobiana:
             }
         )
         tabela.index.name = 'iteração'
-        print(tabela)
         tabela.to_latex('trabalho_1/Q3/resultados_Q3/jacobiana_resultado.tex', index=True)
 
         pass

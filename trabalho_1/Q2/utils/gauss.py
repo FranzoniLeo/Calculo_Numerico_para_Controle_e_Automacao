@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 '''
 Limitações:
@@ -32,9 +33,27 @@ class Gauss:
                 soma += self.A[i, j] * x[j]
             # x[i] = (b[i] - soma) / A[i,i]
             x[i] = (self.b[i] - soma) / self.A[i, i]
-        self.x = x
-        return self.x
+
+        self.resultado = x
+        return self.resultado
 
     def imprimir(self):
         print(" ")
-        print(self.x)
+        print(self.resultado)
+
+
+    def exportar(self):
+        if self.resultado is None:
+            self.triangularizacao()
+            self.retrosubstituicao()
+
+        tabela = pd.DataFrame(
+            {
+                'x': self.resultado
+            }
+        )
+        tabela.index.name = 'iteração'
+        
+        tabela.to_latex('trabalho_1/Q2/resultados_Q2/elimgauss_Q2.tex', index=True)
+
+        pass
