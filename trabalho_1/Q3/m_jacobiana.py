@@ -1,5 +1,6 @@
 import numpy as np
 import sympy as sp
+import pandas as pd
 
 
 class Jacobiana:
@@ -8,7 +9,7 @@ class Jacobiana:
         self.Q = np.array(Q, dtype=float)
         self.h = h
         self.determinar()
-        self.J = self.calcular()
+        self.J = self.calcular(self.Q)
 
 
     def determinar(self):
@@ -28,7 +29,7 @@ class Jacobiana:
         sp.pprint(J)
 
 
-    def calcular(self):
+    def calcular(self, Q):
         Fx = self.Fx
         h = self.h
 
@@ -64,6 +65,10 @@ class Jacobiana:
         Xk = self.Q.copy()
         Xk1 = Xk + 2 * p
         k = 0
+        
+        convergencia_vec = []
+        fx_vec = []
+        xk_vec = []
 
         while (k < max_iters) and (self.convergencia(Xk, Xk1) > p):
             if k > 0:
@@ -75,15 +80,46 @@ class Jacobiana:
             Xk1 = Xk - delta
 
             k = k + 1
+            
+            
+            convergencia_vec.append(self.convergencia(Xk, Xk1))
+            fx_vec.append(np.linalg.norm(Fx(Xk1), ord=np.inf))
+            xk_vec.append(Xk)
+    
         
-        print(k)
+        
+        
 
         self.x_k1 = Xk1
+        self.resultado = (xk_vec, fx_vec, convergencia_vec)
         return self.x_k1
 
 
     def imprimir(self):
         print(" ")
         print(self.x_k1)
-
+        print(" ")  
         print(self.Fx(self.x_k1))
+
+
+
+    def exportar(self):
+        if self.resultado is None:
+            self.resolver()
+        tabela = pd.DataFrame(
+            {
+                'Q1': np.array(self.resultado[0])[:, 0],
+                'Q2': np.array(self.resultado[0])[:, 1],
+                'Q3': np.array(self.resultado[0])[:, 2],
+                'Q4': np.array(self.resultado[0])[:, 3],
+                'Q5': np.array(self.resultado[0])[:, 4],
+                'Q6': np.array(self.resultado[0])[:, 5],
+                '||f(x)||': self.resultado[1],
+                'convergencia': self.resultado[2]
+            }
+        )
+        tabela.index.name = 'iteração'
+        print(tabela)
+        tabela.to_latex('trabalho_1/Q3/resultados_Q3/jacobiana_resultado.tex', index=True)
+
+        pass

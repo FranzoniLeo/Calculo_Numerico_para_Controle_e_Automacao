@@ -75,3 +75,18 @@ class FalsaPosicao:
         print('\n')
         print('--------------------------------')
         print('\n')
+
+    def exportar(self):
+        if self.resultado is None:
+            self.calcular()
+        tabela = pd.DataFrame(
+            {
+                'xa': self.resultado[0],
+                'xs': self.resultado[1],
+                'função(xs)': self.resultado[2],
+                'digse(xa,xs)': self.resultado[3],
+            }
+        )
+        tabela.to_latex('trabalho_1/Q1/resultados_Q1/falsa_posicao_resultados.tex', index=True)
+
+        pass

@@ -96,3 +96,20 @@ class Secante:
         print('\n')
         print('--------------------------------')
         print('\n')
+
+
+
+    def exportar(self):
+        if self.resultado is None:
+            self.calcular()
+        tabela = pd.DataFrame(
+            {
+                'x0': self.resultado[0],
+                'x1': self.resultado[1],
+                'f(x1)': self.resultado[2],
+                'DIGSE': self.resultado[3]
+            }
+        )
+        tabela.to_latex('trabalho_1/Q1/resultados_Q1/secante_resultados.tex', index=True)
+
+        pass

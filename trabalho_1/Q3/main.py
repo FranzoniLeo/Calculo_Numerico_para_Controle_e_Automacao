@@ -13,3 +13,4 @@ Fq = [[Q[0] - 10],
 jacobi = Jacobiana(Fq, Q)
 jacobi.resolver()
 jacobi.imprimir()
+jacobi.exportar()

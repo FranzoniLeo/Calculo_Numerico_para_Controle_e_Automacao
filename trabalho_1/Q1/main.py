@@ -23,15 +23,19 @@ def digse(xa, xd):
 bisseccao = Bisseccao(funcao, 0.01, 0.10)
 bisseccao.calcular()
 bisseccao.imprimir()
+bisseccao.exportar()
 
 falsa_posicao = FalsaPosicao(funcao, 0.01, 0.10)
 falsa_posicao.calcular()
 falsa_posicao.imprimir()
+falsa_posicao.exportar()
 
 newton = Newton(funcao, funcao_derivada, 0.03)
 newton.calcular()
 newton.imprimir()
+newton.exportar()
 
-Secante = Secante(funcao, 0.02, 0.05)
-Secante.calcular()
-Secante.imprimir()
+secante = Secante(funcao, 0.02, 0.05)
+secante.calcular()
+secante.imprimir()
+secante.exportar()

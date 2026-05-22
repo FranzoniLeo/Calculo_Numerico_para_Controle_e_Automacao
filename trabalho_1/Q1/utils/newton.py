@@ -85,3 +85,21 @@ class Newton:
         print('\n')
         print('--------------------------------')
         print('\n')
+    
+
+
+
+    def exportar(self):
+        if self.resultado is None:
+            self.calcular()
+        tabela = pd.DataFrame(
+            {
+                'xk': self.resultado[0],
+                'f(xk)': self.resultado[1],
+                'df(xk)': self.resultado[2],
+                'digse': self.resultado[3]
+            }
+        )
+        tabela.to_latex('trabalho_1/Q1/resultados_Q1/newton_resultados.tex', index=True)
+
+        pass

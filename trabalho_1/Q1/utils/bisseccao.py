@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 
 
+
 class Bisseccao:
 
     ''' Inicialização da classe Bisseccao 
@@ -75,3 +76,21 @@ class Bisseccao:
         print('\n')
         print('--------------------------------')
         print('\n')
+
+
+    def exportar(self):
+        if self.resultado is None:
+            self.calcular()
+        
+        tabela = pd.DataFrame(
+            {
+                'xa': self.resultado[0],
+                'xs': self.resultado[1],
+                'função(xs)': self.resultado[2],
+                'digse(xa,xs)': self.resultado[3],
+            }
+        )
+        tabela.to_latex('trabalho_1/Q1/resultados_Q1/bisseccao_resultados.tex', index=True)
+
+        pass
+
