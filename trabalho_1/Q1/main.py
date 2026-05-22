@@ -1,6 +1,5 @@
 import numpy as np
 
-
 from utils.bisseccao import Bisseccao
 from utils.falsa_posicao import FalsaPosicao
 from utils.newton import Newton
@@ -9,6 +8,7 @@ from utils.secante import Secante
 def funcao(f, eps = 0.0002, D = 0.05, Re = 100000):
     return ((1/(np.sqrt(f))) + (2*np.log10(((eps)/(3.7*D)) + ((2.51)/(Re*(np.sqrt(f)))))))
 
+# Derivada de F(f) (necessária para Newton)
 def funcao_derivada(f, eps = 0.0002, D = 0.05, Re = 100000):
     termo1 = -(1/(2*(f**(3/2))))
     termo2 = 2/np.log(10)
@@ -16,25 +16,30 @@ def funcao_derivada(f, eps = 0.0002, D = 0.05, Re = 100000):
     termo3b = (eps/(3.7*D)) + (2.51/(Re*np.sqrt(f)))
     return termo1 + (termo2 * (termo3a/termo3b))
 
+# Dígitos significativos efetivos (comparar métodos)
 def digse(xa, xd):
     return -(np.log10((abs(xd - xa))/(abs(xd))))
 
 
+# Bisseção no intervalo [0.01, 0.10]
 bisseccao = Bisseccao(funcao, 0.01, 0.10)
 bisseccao.calcular()
 bisseccao.imprimir()
 bisseccao.exportar()
 
+# Falsa posição no mesmo intervalo
 falsa_posicao = FalsaPosicao(funcao, 0.01, 0.10)
 falsa_posicao.calcular()
 falsa_posicao.imprimir()
 falsa_posicao.exportar()
 
+# Newton com chute inicial x0 = 0.03
 newton = Newton(funcao, funcao_derivada, 0.03)
 newton.calcular()
 newton.imprimir()
 newton.exportar()
 
+# Secante entre x0 = 0.02 e x1 = 0.05
 secante = Secante(funcao, 0.02, 0.05)
 secante.calcular()
 secante.imprimir()
