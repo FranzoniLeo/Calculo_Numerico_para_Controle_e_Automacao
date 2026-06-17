@@ -10,7 +10,7 @@ class MinimosQuadrados:
         self.grau = grau
 
         self.A = self.matriz_A()
-        self.cLS = self.calcular()
+        self.CLS = self.calcular()
 
 
     def matriz_A(self):
@@ -24,18 +24,34 @@ class MinimosQuadrados:
         A = self.A
         b = self.y
 
-        cLS = np.linalg.inv(A.T @ A) @ A.T @ b
+        CLS = np.linalg.inv(A.T @ A) @ A.T @ b
 
-        return cLS
+        return CLS
     
     def y_pred(self):
 
-        return self.A @ self.cLS #multiplica as matrizes  
+        return self.A @ self.CLS #multiplica as matrizes  
     
     def MSE(self):
 
         y_pred = self.y_pred()
         mse = np.mean((self.y - y_pred)**2)
+
+        return mse
+    
+    def MSE_teste(self, x_teste, y_teste):
+
+        x_teste = np.array(x_teste, dtype=float)
+        y_teste = np.array(y_teste, dtype=float)
+
+        A_te = np.zeros((len(x_teste), self.grau + 1))
+
+        for i in range(self.grau + 1):
+            A_te[:, i] = x_teste**i
+
+        y_pred = A_te @ self.CLS
+
+        mse = np.mean((y_teste - y_pred)**2)
 
         return mse
 
@@ -44,16 +60,16 @@ class MinimosQuadrados:
         #print(self.A)
         print(f"\nPolinômio de grau {self.grau}")
         print("cLS =")
-        print(self.cLS)
-
-        print(f"MSE treino = {self.MSE():.6f}")
+        print(self.CLS)
+        print(f"MSE treino: {self.MSE()}")
+        
 
     def exportar(self):
 
         tabela = pd.DataFrame(
             {
-                f'c{i}': [self.cLS[i]]
-                for i in range(len(self.cLS))
+                f'c{i}': [self.CLS[i]]
+                for i in range(len(self.CLS))
             }
         )
 
