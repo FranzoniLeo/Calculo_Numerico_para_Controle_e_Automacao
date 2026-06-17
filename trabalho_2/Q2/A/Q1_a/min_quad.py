@@ -27,6 +27,17 @@ class MinimosQuadrados:
         cLS = np.linalg.inv(A.T @ A) @ A.T @ b
 
         return cLS
+    
+    def y_pred(self):
+
+        return self.A @ self.cLS #multiplica as matrizes  
+    
+    def MSE(self):
+
+        y_pred = self.y_pred()
+        mse = np.mean((self.y - y_pred)**2)
+
+        return mse
 
     def imprimir(self):
         #print("Matriz A:")
@@ -34,6 +45,8 @@ class MinimosQuadrados:
         print(f"\nPolinômio de grau {self.grau}")
         print("cLS =")
         print(self.cLS)
+
+        print(f"MSE treino = {self.MSE():.6f}")
 
     def exportar(self):
 
