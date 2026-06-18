@@ -25,7 +25,7 @@ for grau in [1, 2, 3, 4]:
     mse_teste.append(mq.MSE_teste(x_teste, y_teste))
     
     mq.imprimir()
-    #mq.exportar()
+    mq.exportar()
 
     # Calcula teste aqui 
     mse_te = mq.MSE_teste(x_teste, y_teste)
