@@ -8,3 +8,7 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+
+# Trajetórias geradas pela Q3 (regenerar com python main.py)
+trabalho_2/Q3/resultados_Q3/p_*.tex
+trabalho_2/Q3/resultados_Q3/pi_*.tex
