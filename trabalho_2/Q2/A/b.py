@@ -1,4 +1,4 @@
-from utils import NewtonBacktracking
+from trabalho_2.Q2.utils import NewtonBacktracking
 import sympy as sp
 
 

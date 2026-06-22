@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import sympy as sp
 import pandas as pd
@@ -28,7 +29,19 @@ class NewtonBacktracking:
         df = sp.lambdify(self.x, df)
         d2f = sp.lambdify(self.x, d2f)
         k = 0
+
+        d2f_vec = []
+        df_vec = []
+        xk_vec = []
+        f_vec = []
+
         while abs(df(xk)) > self.eps and k < self.max_iters:
+
+            df_vec.append(abs(df(xk)))
+            xk_vec.append(xk)
+            f_vec.append(f(xk))
+            d2f_vec.append(abs(d2f(xk)))
+
             if d2f(xk) > 0:
                 vk = -df(xk)/d2f(xk)
             else:
@@ -39,7 +52,10 @@ class NewtonBacktracking:
             
             xk = xk + vk
             k+=1
-        self.resultado = [xk, abs(df(xk)), k]
+
+            
+            
+        self.resultado = [xk_vec, df_vec, d2f_vec, f_vec]
         return self.resultado
     
     def derivar(self, f):
@@ -47,25 +63,28 @@ class NewtonBacktracking:
     
 
 
-    def imprimir(self):
+    def imprimir(self, nome_arq):
         if self.resultado is None:
             self.calcular()
 
-        '''
+        
         tabela = pd.DataFrame(
             {
                 'xk': self.resultado[0],
+                'f(xk)': self.resultado[3],
                 'modulo derivada': self.resultado[1],
-                'iteração': self.resultado[2],
+                'modulo segunda derivada': self.resultado[2]
             }
         )
         tabela.index.name = 'iteração'
         print(tabela)
-        '''
+        
         print(f'xk:', self.resultado[0])
         print(f'modulo derivada:', self.resultado[1])
-        print(f'iteração:', self.resultado[2])
 
         print('\n')
         print('--------------------------------')
         print('\n')
+
+
+        tabela.to_latex('../resultados_T2Q2/' + nome_arq + '.tex', index=True)
